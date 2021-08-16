@@ -12,7 +12,7 @@ namespace Beam.Client.Services
         User CurrentUser { get; set; }
         int SelectedFrequency { get; set; }
 
-        event Action UdpatedFrequencies;
+        event Action UpdatedFrequencies;
         event Action UpdatedRays;
 
         Task GetFrequencies();

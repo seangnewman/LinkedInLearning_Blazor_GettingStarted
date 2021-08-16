@@ -39,13 +39,13 @@ namespace Beam.Client.Services
             if (CurrentUser == null) CurrentUser = new User() { Name = "Anon" + new Random().Next(0, 10) };
         }
 
-        public event Action UdpatedFrequencies;
+        public event Action UpdatedFrequencies;
         public event Action UpdatedRays;
 
         public async Task GetFrequencies()
         {
             Frequencies = await _apiService.FrequencyList();
-            UdpatedFrequencies?.Invoke();
+            UpdatedFrequencies?.Invoke();
         }
 
         public async Task GetRays(int FrequencyId)
@@ -64,7 +64,7 @@ namespace Beam.Client.Services
         public async Task AddFrequency(string Name)
         {
             Frequencies = await _apiService.AddFrequency(new Frequency() { Name = Name });
-            UdpatedFrequencies?.Invoke();
+            UpdatedFrequencies?.Invoke();
         }
 
         public async Task CreateRay(string text)
