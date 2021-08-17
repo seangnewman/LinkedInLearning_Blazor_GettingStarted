@@ -4,6 +4,15 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="FrequencyListTest.razor" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="bunit" Version="1.2.49" />
     <PackageReference Include="bunit.core" Version="1.2.49" />
@@ -23,6 +32,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Beam.Client\Beam.Client.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="FrequencyListTest.razor" />
   </ItemGroup>
 
 </Project>

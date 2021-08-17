@@ -33,7 +33,8 @@ namespace Beam.Tests
 
         public Task CreateRay(string text)
         {
-            throw new NotImplementedException();
+            UpdatedRays?.Invoke();
+            return Task.CompletedTask;
         }
 
         public Task GetFrequencies()
