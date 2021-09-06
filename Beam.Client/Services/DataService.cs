@@ -1,4 +1,5 @@
 ﻿using Beam.Shared;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace Beam.Client.Services
 
         private int? selectedFrequency;
         private IBeamApiService _apiService;
+        private readonly NavigationManager _navigationManager;
 
         public int SelectedFrequency
         {
@@ -33,19 +35,20 @@ namespace Beam.Client.Services
             }
         }
 
-        public DataService(IBeamApiService apiService)
+        public DataService(IBeamApiService apiService, NavigationManager navigationManager)
         {
             _apiService = apiService;
+            _navigationManager = navigationManager;
             if (CurrentUser == null) CurrentUser = new User() { Name = "Anon" + new Random().Next(0, 10) };
         }
 
-        public event Action UpdatedFrequencies;
+        public event Action UdpatedFrequencies;
         public event Action UpdatedRays;
 
         public async Task GetFrequencies()
         {
             Frequencies = await _apiService.FrequencyList();
-            UpdatedFrequencies?.Invoke();
+            UdpatedFrequencies?.Invoke();
         }
 
         public async Task GetRays(int FrequencyId)
@@ -64,7 +67,7 @@ namespace Beam.Client.Services
         public async Task AddFrequency(string Name)
         {
             Frequencies = await _apiService.AddFrequency(new Frequency() { Name = Name });
-            UpdatedFrequencies?.Invoke();
+            UdpatedFrequencies?.Invoke();
         }
 
         public async Task CreateRay(string text)
@@ -78,7 +81,7 @@ namespace Beam.Client.Services
 
             if (CurrentUser.Id == 0)
             {
-                await GetOrCreateUser();
+                _navigationManager.NavigateTo("/login");
                 ray.UserId = CurrentUser.Id;
             }
 
@@ -88,23 +91,16 @@ namespace Beam.Client.Services
 
         public async Task PrismRay(int RayId)
         {
-            if (CurrentUser.Id == 0) await GetOrCreateUser();
+            if (CurrentUser.Id == 0) _navigationManager.NavigateTo("/login");
             Rays = await _apiService.PrismRay(new Prism() { RayId = RayId, UserId = CurrentUser.Id });
             UpdatedRays?.Invoke();
         }
 
         public async Task UnPrismRay(int RayId)
         {
-            if (CurrentUser.Id == 0) await GetOrCreateUser();
+            if (CurrentUser.Id == 0) _navigationManager.NavigateTo("/login");
             Rays = await _apiService.UnPrismRay(RayId, CurrentUser.Id);
             UpdatedRays?.Invoke();
-        }
-
-        public async Task<User> GetOrCreateUser(string newName = null)
-        {
-            var name = newName ?? CurrentUser.Name;
-            CurrentUser = await _apiService.GetUser(name);
-            return CurrentUser;
         }
     }
 }

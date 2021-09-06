@@ -1,4 +1,5 @@
 ﻿@inherits TestComponentBase
+
 <Fixture Description="Add a new Frequency appears in the list" Test="TestFrequenceyListAdd">
     <ComponentUnderTest>
         <FrequencyList></FrequencyList>
@@ -6,12 +7,12 @@
     <Fragment>
         <li diff:ignore></li>
         <li class:ignore>
-            <a href="frequency/2" class="nav-link">
-                <span class="oi oi-audio-spectrum" aria-hidden="true"></span>
-                <span>
-                    Hi
-                </span>
-            </a>
+        <a href="frequency/2" class="nav-link">
+            <span class="oi oi-audio-spectrum" aria-hidden="true"></span>
+            <span>
+            Hi
+            </span>
+        </a>
         </li>
         <li diff:ignore></li>
     </Fragment>
@@ -26,7 +27,6 @@
         <li diff:ignore></li>
     </Fragment>
 </Fixture>
-
 
 @code
 {

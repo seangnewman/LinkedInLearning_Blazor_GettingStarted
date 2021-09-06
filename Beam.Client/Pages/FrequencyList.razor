@@ -15,22 +15,22 @@
 <li class="nav-item px-3">
     <EditForm Model="@newFrequency" OnValidSubmit="AddFrequency">
         <DataAnnotationsValidator />
-        <div class="input-group">
-            <InputText @bind-Value="newFrequency.Name" placeholder="New Frequency" class="form-control" />
-            <div class="input-group-append">
-                <button type="submit" class="btn btn-secondary"><span class="oi oi-plus"></span></button>
-            </div>
+    <div class="input-group">
+        <InputText @bind-Value="newFrequency.Name" placeholder="New Frequency" class="form-control" />
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-secondary"><span class="oi oi-plus"></span></button>
         </div>
-        <ValidationMessage For="( () => newFrequency.Name)" />
+    </div>
+    <ValidationMessage For="@(() => newFrequency.Name)" />
     </EditForm>
 </li>
 
 @code
 {
-    private NewFrequency newFrequency { get; set; } = new NewFrequency();
+    private NewFrequency newFrequency {get;set;} = new NewFrequency();
     protected override void OnInitialized()
     {
-        data.UpdatedFrequencies += StateHasChanged;
+        data.UdpatedFrequencies += StateHasChanged;
         data.GetFrequencies().ConfigureAwait(false);
     }
 
@@ -38,8 +38,6 @@
     {
         var name = newFrequency.Name;
         newFrequency.Name = "";
-
         await data.AddFrequency(name);
-        
     }
 }

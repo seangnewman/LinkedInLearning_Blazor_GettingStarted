@@ -1,41 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>full</DebugType>
-    <DebugSymbols>true</DebugSymbols>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RazorLangVersion>3.0</RazorLangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="FrequencyListTest.razor" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Blazored.LocalStorage" Version="4.1.5" />
     <PackageReference Include="bunit" Version="1.2.49" />
     <PackageReference Include="bunit.core" Version="1.2.49" />
     <PackageReference Include="bunit.web" Version="1.2.49" />
     <PackageReference Include="bunit.web.testcomponents" Version="1.2.49" />
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="coverlet.collector" Version="3.1.0">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Beam.Client\Beam.Client.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="FrequencyListTest.razor" />
   </ItemGroup>
 
 </Project>

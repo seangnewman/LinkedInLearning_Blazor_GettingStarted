@@ -12,7 +12,7 @@ namespace Beam.Client.Services
         User CurrentUser { get; set; }
         int SelectedFrequency { get; set; }
 
-        event Action UpdatedFrequencies;
+        event Action UdpatedFrequencies;
         event Action UpdatedRays;
 
         Task GetFrequencies();
@@ -29,6 +29,5 @@ namespace Beam.Client.Services
 
         Task UnPrismRay(int RayId);
 
-        Task<User> GetOrCreateUser(string newName = null);
     }
 }

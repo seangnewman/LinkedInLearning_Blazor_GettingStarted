@@ -1,22 +1,15 @@
-﻿using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
 
-namespace Beam.Tests
+public class MockNavigationManager : NavigationManager
 {
-    public class MockNavigationManager : NavigationManager
+    public MockNavigationManager()
     {
-        public MockNavigationManager()
-        {
-            Initialize("http://localhost/", "http://localhost/");
-        }
-
-        protected override void NavigateToCore(string uri, bool forceLoad)
-        {
-            throw new NotImplementedException();
-        }
+        Initialize("http://localhost/","http://localhost/");
     }
+
+    protected override void NavigateToCore(string uri, bool forceLoad)
+    {
+        throw new System.NotImplementedException();
+    }
+
 }

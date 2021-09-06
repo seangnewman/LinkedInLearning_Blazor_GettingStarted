@@ -1,24 +1,22 @@
-﻿using Beam.Client.Services;
-using Beam.Shared;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Beam.Client.Services;
+using Beam.Shared;
+using System.Linq;
 
-namespace Beam.Tests
-{
+namespace Beam.Tests{
     public class TestDataService : IDataService
     {
-        public IReadOnlyList<Frequency> Frequencies { get; private set; }
-        = new List<Frequency> () { new Frequency() { Id = 1, Name = "1" } };
+        public IReadOnlyList<Frequency> Frequencies {get; private set;} = 
+                new List<Frequency>() { new Frequency() { Id = 1, Name ="1"}};
 
         public IReadOnlyList<Ray> Rays => throw new NotImplementedException();
 
         public User CurrentUser { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public int SelectedFrequency { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public event Action UpdatedFrequencies;
+        public event Action UdpatedFrequencies;
         public event Action UpdatedRays;
 
         public Task AddFrequency(string Name)
@@ -27,7 +25,7 @@ namespace Beam.Tests
             list.AddRange(Frequencies);
             list.Add(new Frequency() { Id = Frequencies.Max(f => f.Id) + 1, Name = Name });
             Frequencies = list;
-            UpdatedFrequencies?.Invoke();
+            UdpatedFrequencies?.Invoke();
             return Task.CompletedTask;
         }
 
